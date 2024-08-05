@@ -23,14 +23,14 @@ accelerate launch --config_file config/accelerate_configs/deepspeed_zero3.yaml  
 accelerate launch --config_file config/accelerate_configs/deepspeed_zero3.yaml  scripts/run_list.py mistral-7b-base/neural_ndcg/config.yaml 
 ```
 
-For slurm, please refer to `./commands/mistral-7b-base/commands.sh` and submit the slurm job like:
+For slurm, please refer to [command demo](./commands/mistral-7b-base/commands.sh) and submit the slurm job like:
 
 `sbatch --job-name=all_pairs_0.1 dpo.slurm dpo 0.1 8 all_pairs 32`
 
 ## Customize
 1. modify the trainer file `./scripts/ndcg_trainer.py` to define your own loss function and the configuration `NDCGConfig` class in `./scripts/run_list.py`.
 
-2. change the config files in `./config/model_name/method_name/config.yaml`. The illustration lies in `./config/mistral-7b-base/neural_ndcg/config.yaml`.
+2. change the config files in `./config/model_name/method_name/config.yaml`. The illustration lies in [NeuralNDCG config](./config/mistral-7b-base/neural_ndcg/config.yaml).
 
 # Evaluation
 Please refer to [Evaluation Instructions](./eval/README.md).
