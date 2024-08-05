@@ -1,0 +1,48 @@
+# Model arguments
+model_name_or_path: alignment-handbook/zephyr-7b-sft-full
+torch_dtype: float16
+use_flash_attention_2: false
+
+# Data training arguments
+dataset_mixer:
+  yangzhao02/ListUltraFeedback: 1.0
+dataset_splits:
+- train
+- test
+preprocessing_num_workers: 40
+
+# NDCGTrainer arguments
+fp16: True
+beta: 0.1
+list_size: 8
+loss_type: hinge
+
+do_eval: true
+evaluation_strategy: steps
+eval_steps: 200
+gradient_accumulation_steps: 8
+gradient_checkpointing: true
+gradient_checkpointing_kwargs:
+  use_reentrant: False
+hub_model_id: mistral-7b-base-hinge-listsize_8-beta_0.1
+learning_rate: 5.0e-7
+log_level: info
+logging_steps: 5
+lr_scheduler_type: cosine
+max_length: 1024
+max_prompt_length: 512
+num_train_epochs: 1
+optim: adamw_torch
+output_dir: ./mistral-7b-base/mistral-7b-base-lipo-listsize_8-beta_0.1
+overwrite_output_dir: True
+run_name: mistral-7b-base-hinge-listsize_8-beta_0.1
+per_device_train_batch_size: 1
+per_device_eval_batch_size: 1
+push_to_hub: true
+report_to:
+- wandb
+save_strategy: "steps"
+save_steps: 100
+save_total_limit: 1
+seed: 42
+warmup_ratio: 0.1
