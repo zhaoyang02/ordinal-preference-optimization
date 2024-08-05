@@ -34,7 +34,7 @@ Second, modify the trainer file `./scripts/ndcg_trainer.py` to define your own l
 Please refer to [Evaluation Instructions](./eval/README.md).
 
 # Dataset
-Our dataset **ListUltraFeedback** is released on [HuggingFace](https://huggingface.co/datasets/yangzhao02/ListUltraFeedback), which is a mixture of [UltraFeedback](https://huggingface.co/datasets/openbmb/UltraFeedback) and [Llama3-UltraFeedback](https://huggingface.co/datasets/princeton-nlp/llama3-ultrafeedback-armorm).
+Our dataset [ListUltraFeedback](https://huggingface.co/datasets/yangzhao02/ListUltraFeedback) is released on HuggingFace, which is a mixture of [UltraFeedback](https://huggingface.co/datasets/openbmb/UltraFeedback) and [Llama3-UltraFeedback](https://huggingface.co/datasets/princeton-nlp/llama3-ultrafeedback-armorm).
 
 How to get our Listwise Preference Dataset:
 
