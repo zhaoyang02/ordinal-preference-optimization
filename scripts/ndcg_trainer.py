@@ -537,7 +537,7 @@ class NDCGTrainer(DPOTrainer):
         reference_all_logps: torch.FloatTensor,
         scores: torch.FloatTensor,
         padded_value_indicator=-1, temperature=1., powered_relevancies=True, k=None,
-        stochastic=False, n_samples=32, beta=0.1, log_scores=True)-> torch.FloatTensor:
+        )-> torch.FloatTensor:
         '''
         The code is based on https://github.com/allegro/allRank/blob/master/allrank/models/losses/neuralNDCG.py
         Args:
@@ -561,33 +561,19 @@ class NDCGTrainer(DPOTrainer):
 
         y_true = scores.to(self.accelerator.device)
 
-        if self.ablation_type == "top-4":
-            k = 4
-        elif k is None:
-            k = y_true.shape[1]
+        k = y_true.shape[1]
 
         mask = (y_true == padded_value_indicator)
-        # Choose the deterministic/stochastic variant
-        if stochastic:
-            P_hat = stochastic_neural_sort(y_pred.unsqueeze(-1), n_samples=n_samples, tau=temperature, mask=mask,
-                                        beta=beta, log_scores=log_scores,dev=dev)
-        else:
-            P_hat = deterministic_neural_sort(y_pred.unsqueeze(-1), tau=temperature, mask=mask,dev=dev).unsqueeze(0)
+        P_hat = deterministic_neural_sort(y_pred.unsqueeze(-1), tau=temperature, mask=mask,dev=dev).unsqueeze(0)
 
         # Perform sinkhorn scaling to obtain doubly stochastic permutation matrices
-        if self.ablation_type == "scale":
-            P_hat = P_hat.view(P_hat.shape[0] * P_hat.shape[1], P_hat.shape[2], P_hat.shape[3])
-        else:
-            P_hat = sinkhorn_scaling(P_hat.view(P_hat.shape[0] * P_hat.shape[1], P_hat.shape[2], P_hat.shape[3]),
+        P_hat = sinkhorn_scaling(P_hat.view(P_hat.shape[0] * P_hat.shape[1], P_hat.shape[2], P_hat.shape[3]),
                                     mask.repeat_interleave(P_hat.shape[0], dim=0), tol=1e-6, max_iter=50)
         P_hat = P_hat.view(int(P_hat.shape[0] / y_pred.shape[0]), y_pred.shape[0], P_hat.shape[1], P_hat.shape[2])
 
         # Mask P_hat and apply to true labels, ie approximately sort them
         P_hat = P_hat.masked_fill(mask[None, :, :, None] | mask[None, :, None, :], 0.)
         y_true_masked = y_true.masked_fill(mask, 0.).unsqueeze(-1).unsqueeze(0)
-        
-        if self.ablation_type == "no_power":
-            powered_relevancies = False
         
         if powered_relevancies:
             y_true_masked = torch.pow(2., y_true_masked) - 1.
