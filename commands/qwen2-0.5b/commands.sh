@@ -13,7 +13,7 @@
 #sbatch --job-name=list_mle_0.1 dpo.slurm dpo 0.1 8 list_mle 32
 
 #ApproxNDCG
-#sbatch --job-name=approx_50.0 approx_ndcg_1.slurm approx_ndcg_1 50.0 8 32
+#sbatch --job-name=approx_50.0 approx_ndcg.slurm approx_ndcg 50.0 8 32
 
 #NeuralNDCG
 #sbatch --job-name=neural_0.1 neural_ndcg.slurm neural_ndcg 0.1 1.0 8 32 none

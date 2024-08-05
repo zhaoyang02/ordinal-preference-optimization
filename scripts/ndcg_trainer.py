@@ -102,8 +102,6 @@ class NDCGTrainer(DPOTrainer):
         self.list_size = training_args.list_size
         self.pairwise_type = training_args.pairwise_type
         self.ablation_type = training_args.ablation_type
-        self.log_data = True
-        self.log_loss = True
 
         super().__init__(**kwargs)  # Pass all other arguments using **kwargs
         
@@ -282,7 +280,7 @@ class NDCGTrainer(DPOTrainer):
             **model_kwargs,
         ).logits
 
-        average_log_prob_flag = True if self.loss_type in ["approx_ndcg_2","simpo"] else False
+        average_log_prob_flag = True if self.loss_type in ["simpo"] else False
 
         all_logps = self.get_batch_logps(
             all_logits,
@@ -320,7 +318,7 @@ class NDCGTrainer(DPOTrainer):
                     _,
                 ) = self.concatenated_forward(self.ref_model, batch)
 
-        if self.loss_type.startswith("approx_ndcg"):
+        if self.loss_type == "approx_ndcg":
             losses = self.approxNDCG_loss(
                 policy_all_logps,
                 reference_all_logps,
@@ -460,21 +458,12 @@ class NDCGTrainer(DPOTrainer):
         Returns:
             [batch_size,]
         '''
-        if self.loss_type == "approx_ndcg_1":
-            if policy_all_logps.shape == reference_all_logps.shape:
-                logratios = policy_all_logps - reference_all_logps
-                y_pred = self.beta * logratios
-                y_pred = y_pred.to(self.accelerator.device)
-            else:
-                raise ValueError(f"policy_all_logps shape:{policy_all_logps.shape} and reference_all_logps shape:{reference_all_logps.shape} should be the same!")
-
-        elif self.loss_type == "approx_ndcg_2":
-            y_pred = self.beta * policy_all_logps
+        if policy_all_logps.shape == reference_all_logps.shape:
+            logratios = policy_all_logps - reference_all_logps
+            y_pred = self.beta * logratios
             y_pred = y_pred.to(self.accelerator.device)
-            
         else:
-            raise ValueError(f"loss_type should be approx_ndcg_1 or approx_ndcg_2 but got {self.loss_type}")
-
+            raise ValueError(f"policy_all_logps shape:{policy_all_logps.shape} and reference_all_logps shape:{reference_all_logps.shape} should be the same!")
         y_true = scores.to(self.accelerator.device)
         
         pos_idxs = torch.arange(1, y_pred.shape[1] + 1).to(self.accelerator.device)

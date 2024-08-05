@@ -48,11 +48,11 @@ MISTRAL_CHAT_TEMPLATE = "{% if messages[0]['role'] == 'system' %}{% set loop_mes
 @dataclass
 class NDCGConfig(DPOConfig):
     alpha: Optional[float] = field(
-        default=100.0,
+        default=25.0,
         metadata={"help": "alpha parameter for ApproxNDCG loss."},
     )
     gamma: Optional[float] = field(
-        default=0.5,
+        default=0.1,
         metadata={"help": "The target reward margin term in SimPO loss."},
     )
     tau: Optional[float] = field(
@@ -63,7 +63,7 @@ class NDCGConfig(DPOConfig):
         default=8,
         metadata={"help": "The number of responses to consider in the listwise ranking."},
     )
-    loss_type: Optional[Literal["approx_ndcg_1","dpo","simpo","hinge", "lipo","neural_ndcg"]] = field(
+    loss_type: Optional[Literal["dpo","simpo","hinge", "lipo","approx_ndcg","neural_ndcg"]] = field(
         default="neural_ndcg",
         metadata={"help": "The loss function to use for training."},
     )
