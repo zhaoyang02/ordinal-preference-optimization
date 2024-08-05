@@ -20,10 +20,6 @@ export MASTER_PORT=$(python find_port.py)
 
 export ACCELERATE_LOG_LEVEL=info
 export TRANSFORMERS_VERBOSITY=info
-export NCCL_TIMEOUT=7200
-export CUDA_DEVICE_MAX_CONNECTIONS=32
-export NCCL_ASYNC_ERROR_HANDLING=1
-export TORCH_NCCL_HEARTBEAT_TIMEOUT_SEC=7200
 
 export MODEL="mistral-7b-base"
 export TASK=$1
@@ -40,7 +36,7 @@ BATCH_SIZE=$(($WORLD_SIZE*$GRAD_ACCUM))
 
 export unique_config_file="./config/${MODEL}/${TASK}/config_${SLURM_JOB_ID}.yaml"
 cp ./config/${MODEL}/${TASK}/config.yaml $unique_config_file
-RUN_NAME="$MODEL-$TASK-listsize_$LIST_SIZE-tau_$TAU-beta_$BETA-batchsize_$BATCH_SIZE"
+RUN_NAME="$MODEL-$TASK"
 OUTPUT_DIR="./$MODEL/$RUN_NAME"
 
 # Modify the unique configuration file
@@ -58,10 +54,6 @@ sed -i "s|^\s*output_dir:.*|output_dir: ${OUTPUT_DIR}|" $unique_config_file
 COMMAND='
 echo "$RUN_NAME START TIME: $(date)"
 cat $unique_config_file
-export NCCL_TIMEOUT=7200
-export CUDA_DEVICE_MAX_CONNECTIONS=32
-export NCCL_ASYNC_ERROR_HANDLING=1
-export TORCH_NCCL_HEARTBEAT_TIMEOUT_SEC=7200
 
 accelerate launch \
     --config_file config/accelerate_configs/deepspeed_zero3.yaml  \
