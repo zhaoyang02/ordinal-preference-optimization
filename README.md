@@ -32,7 +32,7 @@ For slurm, please refer to [command demo](./commands/mistral-7b-base/commands.sh
 
 2. change the config files in `./config/model_name/method_name/config.yaml`. The illustration lies in [NeuralNDCG config](./config/mistral-7b-base/neural_ndcg/config.yaml).
 
-# Evaluation
+## Evaluation
 Please refer to [Evaluation Instructions](./eval/README.md).
 
 # Dataset
