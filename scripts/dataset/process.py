@@ -1,7 +1,6 @@
 from datasets import load_dataset, DatasetDict, concatenate_datasets,Dataset
 import hashlib
 import random
-import time
 
 random.seed(42)
 
@@ -45,11 +44,9 @@ new_dataset = Dataset.from_dict({
     "all_responses": [v["all_responses"] for v in combined_data.values()],
 })
 
-# 获取 ds2_a 和 ds2_b 中的 prompt_id 集合
 train_prompt_ids = set(ds2_a["prompt_id"])
 test_prompt_ids = set(ds2_b["prompt_id"])
 
-# 根据 prompt_id 进行切分
 train_data = new_dataset.filter(lambda x: x["prompt_id"] in train_prompt_ids)
 test_data = new_dataset.filter(lambda x: x["prompt_id"] in test_prompt_ids)
 
