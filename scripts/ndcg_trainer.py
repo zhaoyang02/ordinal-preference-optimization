@@ -110,19 +110,19 @@ class NDCGTrainer(DPOTrainer):
         '''DATAPROCESSING STEP 2
         Tokenize a single row from a Listwise preference dataset.
         returns:
-        batch={
-            'prompt_input_ids':torch.LongTensor,
-            'prompt_attention_mask':torch.LongTensor,
-            'response_0_input_ids':torch.LongTensor,
-            'response_0_attention_mask':torch.LongTensor,
-            'response_0_labels':torch.LongTensor,
-            'response_1_input_ids':torch.LongTensor,
-            'response_1_attention_mask':torch.LongTensor,
-            'response_1_labels':torch.LongTensor,
-            ...
-            ...
-            'scores':torch.tensor
-        }
+            batch={
+                'prompt_input_ids':torch.LongTensor,
+                'prompt_attention_mask':torch.LongTensor,
+                'response_0_input_ids':torch.LongTensor,
+                'response_0_attention_mask':torch.LongTensor,
+                'response_0_labels':torch.LongTensor,
+                'response_1_input_ids':torch.LongTensor,
+                'response_1_attention_mask':torch.LongTensor,
+                'response_1_labels':torch.LongTensor,
+                ...
+                ...
+                'scores':torch.tensor
+            }
         '''
         batch = {}
         prompt = feature["prompt"]
@@ -213,11 +213,14 @@ class NDCGTrainer(DPOTrainer):
         device: Optional[torch.device] = None,
     ) -> Dict[str, torch.LongTensor]:
         '''DATAPROCESSING STEP 4
-        input:
-            batch=[2+lise_size*3+1 : [batch_size,seq_len]]
+        args:
+            batch={2 + lise_size*3 + 1 : [batch_size,seq_len]}
         returns:
-            concatenated_batch={3 : [batch_size*lise_size,seq_len]}
-            #key: concatenated_input_ids, concatenated_attention_mask, concatenated_labels
+            concatenated_batch={
+                "concatenated_input_ids": [batch_size*lise_size,seq_len],
+                "concatenated_attention_mask": [batch_size*lise_size,seq_len],
+                "concatenated_labels": [batch_size*lise_size,seq_len]
+            }
         '''
         
         concatenated_batch = {}
@@ -252,6 +255,8 @@ class NDCGTrainer(DPOTrainer):
         self, model: nn.Module, batch: Dict[str, Union[List, torch.LongTensor, torch.FloatTensor]]
     ) -> Tuple[torch.FloatTensor, torch.FloatTensor]:
         '''
+        args:
+            batch={2 + lise_size*3 + 1 : [batch_size,seq_len]}
         Returns:
             Tuple([batch_size*list_size,seq_len,vocab_size], [batch_size, list_size])
         '''
@@ -547,7 +552,6 @@ class NDCGTrainer(DPOTrainer):
         Returns:
             [batch_size,]
         '''
-        #The code is based on https://github.com/allegro/allRank/blob/master/allrank/models/losses/neuralNDCG.py
 
         dev=self.accelerator.device
         temperature = self.tau
