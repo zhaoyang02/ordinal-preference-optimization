@@ -32,12 +32,11 @@ BETA=$2
 TAU=$3
 LIST_SIZE=$4
 GRAD_ACCUM=$5
-ABLATION_TYPE=$6
 BATCH_SIZE=$(($WORLD_SIZE*$GRAD_ACCUM))
 
 export unique_config_file="./config/${MODEL}/${TASK}/config_${SLURM_JOB_ID}.yaml"
 cp ./config/${MODEL}/${TASK}/config.yaml $unique_config_file
-RUN_NAME="$MODEL-$TASK-listsize_$LIST_SIZE-alpha_$ALPHA-batchsize_$BATCH_SIZE"
+RUN_NAME="$MODEL-$TASK"
 OUTPUT_DIR="./$MODEL/$RUN_NAME"
 
 # Modify the unique configuration file
@@ -46,7 +45,6 @@ sed -i "s|^\s*beta:.*|beta: ${BETA}|" $unique_config_file
 sed -i "s|^\s*tau:.*|tau: ${TAU}|" $unique_config_file
 sed -i "s|^\s*list_size:.*|list_size: ${LIST_SIZE}|" $unique_config_file
 sed -i "s|^\s*gradient_accumulation_steps:.*|gradient_accumulation_steps: ${GRAD_ACCUM}|" $unique_config_file
-sed -i "s|^\s*ablation_type:.*|ablation_type: ${ABLATION_TYPE}|" $unique_config_file
 
 sed -i "s|^\s*run_name:.*|run_name: ${RUN_NAME}|" $unique_config_file
 sed -i "s|^\s*hub_model_id:.*|hub_model_id: ${RUN_NAME}|" $unique_config_file

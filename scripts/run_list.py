@@ -75,10 +75,6 @@ class NDCGConfig(DPOConfig):
         default=False,
         metadata={"help": "Whether to use QWEN2 or not."},
     )
-    ablation_type: Optional[Literal["none","no_power","top-4","scale"]] = field(
-        default="none",
-        metadata={"help": "The ablation type to use for NeuralNDCG."},
-    )
 
 def apply_chat_template(
     example,

@@ -15,7 +15,7 @@ preprocessing_num_workers: 40
 
 # NDCGTrainer arguments
 fp16: True
-beta: 0.05
+beta: 0.1
 tau: 1.0
 list_size: 8
 loss_type: neural_ndcg

@@ -13,7 +13,7 @@ preprocessing_num_workers: 40
 
 # NDCGTrainer arguments
 fp16: true
-beta: 0.05
+beta: 0.1
 list_size: 8
 loss_type: dpo
 pairwise_type: all_pairs
@@ -25,7 +25,7 @@ gradient_accumulation_steps: 8
 gradient_checkpointing: true
 gradient_checkpointing_kwargs:
   use_reentrant: False
-hub_model_id: mistral-7b-base-dpo-all_pairs-listsize_8-beta_0.05
+hub_model_id: mistral-7b-base-dpo-all_pairs
 learning_rate: 5.0e-7
 log_level: info
 logging_steps: 5
@@ -34,9 +34,9 @@ max_length: 1024
 max_prompt_length: 512
 num_train_epochs: 1
 optim: adamw_torch
-output_dir: ./mistral-7b-base/mistral-7b-base-dpo-all_pairs-listsize_8-beta_0.05
+output_dir: ./mistral-7b-base/mistral-7b-base-dpo-all_pairs
 overwrite_output_dir: true
-run_name: mistral-7b-base-dpo-all_pairs-listsize_8-beta_0.05
+run_name: mistral-7b-base-dpo-all_pairs
 per_device_train_batch_size: 1
 per_device_eval_batch_size: 1
 push_to_hub: true

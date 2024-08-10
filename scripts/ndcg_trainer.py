@@ -101,7 +101,6 @@ class NDCGTrainer(DPOTrainer):
         self.tau = training_args.tau
         self.list_size = training_args.list_size
         self.pairwise_type = training_args.pairwise_type
-        self.ablation_type = training_args.ablation_type
 
         super().__init__(**kwargs)  # Pass all other arguments using **kwargs
         
