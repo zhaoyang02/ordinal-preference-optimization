@@ -1,6 +1,6 @@
 #dpo
 #sbatch --job-name=all_pairs dpo.slurm dpo 0.1 8 all_pairs 8
-#sbatch --job-name=worst dpo.slurm dpo 0.1 8 best_with_worst 8
+#sbatch --job-name=worst dpo.slurm dpo 0.1 2 best_with_worst 8
 #sbatch --job-name=others dpo.slurm dpo 0.1 8 best_with_others 8
 
 #SLiC

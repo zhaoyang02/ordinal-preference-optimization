@@ -1,5 +1,5 @@
 ## Evaluation
-We provide details on the evaluation of the models in this directory. Specifically, we evaluate on [ListUltraFeedback](https://huggingface.co/datasets/yangzhao02/ListUltraFeedback) [AlpacaEval 2](https://github.com/tatsu-lab/alpaca_eval) and [MT-Bench](https://github.com/lm-sys/FastChat/tree/main/fastchat/llm_judge). ListUltraFeedback has 1.97k questions from original [UltraFeedback](https://huggingface.co/datasets/openbmb/UltraFeedback), AlpacaEval 2 consists of 805 questions from 5 datasets, and MT-Bench covers 8 categories with 80 questions. 
+We provide details on the evaluation of the models in this directory. Specifically, we evaluate on ListUltraFeedback [AlpacaEval 2](https://github.com/tatsu-lab/alpaca_eval) and [MT-Bench](https://github.com/lm-sys/FastChat/tree/main/fastchat/llm_judge). ListUltraFeedback has 1.97k questions from original [UltraFeedback](https://huggingface.co/datasets/openbmb/UltraFeedback), AlpacaEval 2 consists of 805 questions from 5 datasets, and MT-Bench covers 8 categories with 80 questions. 
 
 ### Proxy Model
 1. Responses Generation
@@ -38,7 +38,7 @@ Please put the file `./mt-bench/winrate.py` in `FastChat/fastchat/llm_judge/`dic
 ```
 # generate responses for MT-Bench
 python gen_model_answer.py --model-path alignment-handbook/zephyr-7b-sft-full --model-id zephyr-7b-sft-full
-python gen_model_answer.py --model-path yangzhao02/mistral-7b-base-neural_ndcg --model-id mistral-7b-base-neural_ndcg
+python gen_model_answer.py --model-path ./mistral-7b-base-neural_ndcg --model-id mistral-7b-base-neural_ndcg
 
 # Pair-Preference
 python gen_judgment.py --mode pairwise-baseline --baseline-model zephyr-7b-sft-full --judge-model gpt-4-turbo --model-list mistral-7b-base-neural_ndcg

@@ -4,7 +4,7 @@
 # Installation
 1. Clone this Repo
 ```
-git clone https://github.com/zhaoyang02/ndcg-preference-optimization.git
+git clone ...
 cd ndcg-preference-optimization
 ```
 
@@ -36,8 +36,6 @@ Please refer to [Evaluation Instructions](./eval/README.md).
 2. change the config files in `./config/model_name/method_name/config.yaml`. The illustration lies in [NeuralNDCG config](./config/mistral-7b-base/neural_ndcg/config.yaml).
 
 # Dataset
-Our dataset [ListUltraFeedback](https://huggingface.co/datasets/yangzhao02/ListUltraFeedback) is released on HuggingFace, which is a mixture of [UltraFeedback](https://huggingface.co/datasets/openbmb/UltraFeedback) and [Llama3-UltraFeedback](https://huggingface.co/datasets/princeton-nlp/llama3-ultrafeedback-armorm).
-
 How to get our Listwise Preference Dataset:
 
 ```
@@ -49,9 +47,6 @@ python process.py
 # Reward Scoring Model
 sbatch score.sh
 ```
-
-# Released models
-Please visit HuggingFace [repo](https://huggingface.co/yangzhao02) to download the released models.
 
 # Acknowledge
 This Repo is derived from HuggingFace [Alignment-handbook](https://github.com/huggingface/alignment-handbook) and [trl](https://github.com/huggingface/trl). The implementation of NeuralNDCG loss is heavily built on [allRank](https://github.com/allegro/allRank). Thank the authors for their excellent work.
