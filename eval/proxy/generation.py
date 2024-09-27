@@ -10,7 +10,7 @@ import sys
 random.seed(42)
 device = "cuda"
 
-ds = load_dataset("yangzhao02/ListUltraFeedback", split="test")
+ds = load_dataset("OPO-alignment/ListUltraFeedback", split="test")
 ds = ds.shuffle(seed=42)
 
 model_name = sys.argv[1]

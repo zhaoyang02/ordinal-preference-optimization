@@ -28,8 +28,8 @@ tokenizer = AutoTokenizer.from_pretrained(path, use_fast=True)
 model = model.to(device)
 model = DDP(model, device_ids=[local_rank])
 
-ds_a = load_dataset("yangzhao02/RAW_ListUltraFeedback", split="train")
-ds_b = load_dataset("yangzhao02/RAW_ListUltraFeedback", split="test")
+ds_a = load_dataset("OPO-alignment/RAW_ListUltraFeedback", split="train")
+ds_b = load_dataset("OPO-alignment/RAW_ListUltraFeedback", split="test")
 
 attributes = [
     'helpsteer-helpfulness', 'helpsteer-correctness', 'helpsteer-coherence',
@@ -124,5 +124,5 @@ if local_rank == 0:
     all_ds["train"] = ds_a
     all_ds["test"] = ds_b
 
-    all_ds.push_to_hub("yangzhao02/ListUltraFeedback")
+    all_ds.push_to_hub("OPO-alignment/ListUltraFeedback")
     print("Pushed to hub! Done!")

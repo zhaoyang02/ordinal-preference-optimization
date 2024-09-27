@@ -36,7 +36,9 @@ Please refer to [Evaluation Instructions](./eval/README.md).
 2. change the config files in `./config/model_name/method_name/config.yaml`. The illustration lies in [NeuralNDCG config](./config/mistral-7b-base/neural_ndcg/config.yaml).
 
 # Dataset
-How to get our Listwise Preference Dataset:
+Our ordinal multiple responses dataset is released on [ListUltraFeedback](https://huggingface.co/datasets/OPO-alignment/ListUltraFeedback).
+
+How to get ordinal multiple responses dataset:
 
 ```
 cd ./scripts/dataset
