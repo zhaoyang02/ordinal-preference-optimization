@@ -1,5 +1,5 @@
 ## Evaluation
-We provide details on the evaluation of the models in this directory. Specifically, we evaluate on ListUltraFeedback [AlpacaEval 2](https://github.com/tatsu-lab/alpaca_eval) and [MT-Bench](https://github.com/lm-sys/FastChat/tree/main/fastchat/llm_judge). ListUltraFeedback has 1.97k questions from original [UltraFeedback](https://huggingface.co/datasets/openbmb/UltraFeedback), AlpacaEval 2 consists of 805 questions from 5 datasets, and MT-Bench covers 8 categories with 80 questions. 
+We provide details on the evaluation of the models in this directory. Specifically, we evaluate on ListUltraFeedback [AlpacaEval](https://github.com/tatsu-lab/alpaca_eval) and [MT-Bench](https://github.com/lm-sys/FastChat/tree/main/fastchat/llm_judge). ListUltraFeedback has 1.97k questions from original [UltraFeedback](https://huggingface.co/datasets/openbmb/UltraFeedback), AlpacaEval consists of 805 questions from 5 datasets, and MT-Bench covers 8 categories with 80 questions. 
 
 ### Proxy Model
 1. Responses Generation
@@ -19,12 +19,12 @@ python pairwise_winrate.py
 python reward_winrate.py
 ```
 
-### AlpacaEval 2
-Follow the installation instruction of [AlpacaEval 2](https://github.com/tatsu-lab/alpaca_eval)
+### AlpacaEval
+Follow the installation instruction of [AlpacaEval](https://github.com/tatsu-lab/alpaca_eval)
 ```
 cd ./eval/alpacaeval2
 
-# generate responses for AlpacaEval 2
+# generate responses for AlpacaEval
 python generation.py mistal-7b-base-neural_ndcg
 
 # evaluate with GPT-4 Turbo

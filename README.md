@@ -1,17 +1,17 @@
-# NDCG Preference Optimization
+# Ordinal Preference Optimization
 ![ill](./assets/illustration.png)
 
 # Installation
 1. Clone this Repo
 ```
 git clone ...
-cd ndcg-preference-optimization
+cd ordinal-preference-optimization
 ```
 
 2. Install dependent packages:
 ```
 conda env create -f environment.yaml
-conda activate ndcg
+conda activate opo
 ```
 # Instructions
 ## Training
@@ -19,7 +19,7 @@ conda activate ndcg
 # SFT Stage
 accelerate launch --config_file config/accelerate_configs/deepspeed_zero3.yaml  scripts/run_sft.py mistral-7b-base/sft/config.yaml 
 
-# NDCG Preference Optimization
+# Ordinal Preference Optimization
 accelerate launch --config_file config/accelerate_configs/deepspeed_zero3.yaml  scripts/run_list.py mistral-7b-base/neural_ndcg/config.yaml 
 ```
 

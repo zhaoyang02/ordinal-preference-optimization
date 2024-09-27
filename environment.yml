@@ -1,4 +1,4 @@
-name: ndcg
+name: opo
 channels:
   - pytorch
   - conda-forge
