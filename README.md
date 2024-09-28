@@ -4,7 +4,7 @@
 # Installation
 1. Clone this Repo
 ```
-git clone ...
+git clone git@github.com:zhaoyang02/ordinal-preference-optimization.git
 cd ordinal-preference-optimization
 ```
 
@@ -13,6 +13,7 @@ cd ordinal-preference-optimization
 conda env create -f environment.yaml
 conda activate opo
 ```
+
 # Instructions
 ## Training
 ```
@@ -38,7 +39,7 @@ Please refer to [Evaluation Instructions](./eval/README.md).
 # Dataset
 Our ordinal multiple responses dataset is released on [ListUltraFeedback](https://huggingface.co/datasets/OPO-alignment/ListUltraFeedback).
 
-How to get ordinal multiple responses dataset:
+How to get ordinal multiple responses dataset by mixing [UltraFeedback](https://huggingface.co/datasets/openbmb/UltraFeedback) and [Llama3-UltraFeedback](https://huggingface.co/datasets/princeton-nlp/llama3-ultrafeedback-armorm).
 
 ```
 cd ./scripts/dataset
@@ -46,9 +47,12 @@ cd ./scripts/dataset
 # Process
 python process.py
 
-# Reward Scoring Model
+# Assign Ordinal Rewards
 sbatch score.sh
 ```
+
+# Released models
+Please visit [HuggingFace](https://huggingface.co/yangzhao02) to download the released models.
 
 # Acknowledge
 This Repo is derived from HuggingFace [Alignment-handbook](https://github.com/huggingface/alignment-handbook) and [trl](https://github.com/huggingface/trl). The implementation of NeuralNDCG loss is heavily built on [allRank](https://github.com/allegro/allRank). Thank the authors for their excellent work.
