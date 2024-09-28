@@ -39,7 +39,7 @@ Please refer to [Evaluation Instructions](./eval/README.md).
 # Dataset
 Our ordinal multiple responses dataset is released on [ListUltraFeedback](https://huggingface.co/datasets/OPO-alignment/ListUltraFeedback).
 
-How to get ordinal multiple responses dataset by mixing [UltraFeedback](https://huggingface.co/datasets/openbmb/UltraFeedback) and [Llama3-UltraFeedback](https://huggingface.co/datasets/princeton-nlp/llama3-ultrafeedback-armorm).
+How to get ListUltraFeedback from [UltraFeedback](https://huggingface.co/datasets/openbmb/UltraFeedback) and [Llama3-UltraFeedback](https://huggingface.co/datasets/princeton-nlp/llama3-ultrafeedback-armorm):
 
 ```
 cd ./scripts/dataset
