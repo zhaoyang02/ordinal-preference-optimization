@@ -10,7 +10,7 @@ cd ordinal-preference-optimization
 
 2. Install dependent packages:
 ```
-conda env create -f environment.yaml
+conda env create -f environment.yml
 conda activate opo
 ```
 
